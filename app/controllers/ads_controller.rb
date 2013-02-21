@@ -19,18 +19,29 @@ class AdsController < ApplicationController
     end
   end
 
+  def edit
+    @ad = Ad.find(params[:id])
+  end
+
+  def update
+    @ad = Ad.find(params[:id])
+    @ad.update_attributes(params[:ad])
+    redirect_to "/ads/#{@ad.id}"
+  end
+
   def create
     @ad = Ad.new(params[:ad])
-
-    respond_to do |format|
-      if @ad.save
-        format.html { redirect_to(@ad, :notice => 'Ad was successfully created.') }
-        format.xml  { render :xml => @ad, :status => :created, :location => @ad }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @ad.errors, :status => :unprocessable_entity }
-      end
-    end
+    @ad.save
+    redirect_to "/ads/#{@ad.id}"
+    #respond_to do |format|
+    #  if @ad.save
+    #    format.html { redirect_to(@ad, :notice => 'Ad was successfully created.') }
+    #    format.xml  { render :xml => @ad, :status => :created, :location => @ad }
+    #  else
+    #    format.html { render :action => "new" }
+    #    format.xml  { render :xml => @ad.errors, :status => :unprocessable_entity }
+    #  end
+    #end
   end
 
 end
