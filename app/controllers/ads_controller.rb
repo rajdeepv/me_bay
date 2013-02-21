@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-  before_filter :check_logged_in, :only => [:edit,:update]
+  before_filter :check_logged_in, :only => [:edit,:update,:destroy]
 
   def show
     @ad = Ad.find(params[:id])
@@ -46,11 +46,17 @@ class AdsController < ApplicationController
     #end
   end
 
+  def destroy
+    @ad = Ad.find(params[:id])
+    @ad.destroy
+    redirect_to "/"
+  end
+
   private
 
   def check_logged_in
     authenticate_or_request_with_http_basic("Ads") do |username,password|
-      username = 'admin' && password = 'password'
+      username == 'admin' && password == 'password'
     end
   end
 

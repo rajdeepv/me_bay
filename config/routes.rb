@@ -2,6 +2,7 @@ MeBay::Application.routes.draw do
   resources :ads
 
   match '/' => 'ads#index'
+  match '/ads/:id/delete' => 'ads#destroy'
   #match '/ads/:id' => 'ads#show'
 
   # Sample of regular route:
