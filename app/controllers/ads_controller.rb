@@ -1,4 +1,6 @@
 class AdsController < ApplicationController
+  before_filter :check_logged_in, :only => [:edit,:update]
+
   def show
     @ad = Ad.find(params[:id])
   end
@@ -42,6 +44,14 @@ class AdsController < ApplicationController
     #    format.xml  { render :xml => @ad.errors, :status => :unprocessable_entity }
     #  end
     #end
+  end
+
+  private
+
+  def check_logged_in
+    authenticate_or_request_with_http_basic("Ads") do |username,password|
+      username = 'admin' && password = 'password'
+    end
   end
 
 end
