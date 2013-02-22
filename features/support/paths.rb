@@ -10,8 +10,10 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+      when /^new ad page$/
+        new_ad_path
 
-    # Add more mappings here.
+      # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i
